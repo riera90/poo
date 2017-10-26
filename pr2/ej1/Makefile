@@ -42,7 +42,7 @@ all : $(TESTS)
 
 clean :
 	rm -f $(TESTS) gtest.a gtest_main.a *.o
-	rm -f jugador persona bola crupier
+	rm -f jugador persona bola crupier main.out
 
 # Builds gtest.a and gtest_main.a.
 
@@ -93,3 +93,7 @@ crupier_unittest : crupier.o persona.o crupier_unittest.o gtest_main.a
 jugador_unittest : jugador.o persona.o jugador_unittest.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 
+
+
+main : bola.cc crupier.cc jugador.cc main.cc persona.cc
+	g++ -o main.out $^

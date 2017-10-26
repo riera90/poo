@@ -2,8 +2,8 @@
 
 
 
-Jugador::Jugador(string codigo,
-				string DNI,
+Jugador::Jugador(string DNI,
+				string codigo,	
 				string nombre,
 				string apellidos,
 				string direccion,
@@ -138,7 +138,7 @@ bool Jugador::apuesta_impar()
 bool Jugador::apuesta_bajo()
 {
 	b_.trow();
-	if (/*valor*//*operador*/b_.get_valor())//apuesta ganada
+	if (b_.get_valor()<=18)//apuesta ganada
 	{
 		return true;
 	}
@@ -150,7 +150,7 @@ bool Jugador::apuesta_bajo()
 bool Jugador::apuesta_alto()
 {
 	b_.trow();
-	if (/*valor*//*operador*/b_.get_valor())//apuesta ganada
+	if (b_.get_valor()>18)//apuesta ganada
 	{
 		return true;
 	}
@@ -158,4 +158,9 @@ bool Jugador::apuesta_alto()
 	{
 		return false;
 	}
+}
+
+void Jugador::pushApuesta(struct Apuesta)
+{
+	//apuestas_.push_front(Apuesta);
 }

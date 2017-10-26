@@ -21,6 +21,7 @@ private:
 	int dinero_;
 	string codigo_;
 	std::list <struct Apuesta> apuestas_;
+	//std::list<struct Apuesta>::iterator it_=apuestas_.begin();
 	Bola b_;
 
 	bool apuesta_sencilla(int val);
@@ -32,9 +33,11 @@ private:
 	bool apuesta_impar();
 		//apuesta a la paridad eel valor
 	bool apuesta_bajo();
-		//apuesta a que el número es menor que 17
+		//apuesta a que el número es menor o igual que 18
 	bool apuesta_alto();
-		//apuesta a que el número es mayor que 17
+		//apuesta a que el número es mayor que 18
+	void pushApuesta(struct Apuesta);
+		//hace push a una estrunctura de apuesta en la lista de apuestas
 
 public:
 	Jugador(string codigo,
@@ -55,11 +58,7 @@ public:
 	void setCodigo(string val){codigo_=val;};
 	int getDinero() const {return dinero_;};
 	string getCodigo() const {return codigo_;};
-	std::list <struct Apuesta> getApuestas() {return apuestas_;};
-
-
-
-
+	std::list <struct Apuesta> getApuestas() const {return apuestas_;};
 
 };
 
