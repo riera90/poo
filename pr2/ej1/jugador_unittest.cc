@@ -67,6 +67,7 @@ TEST(Jugador, setApuestasygetApuestasVacio) {
   EXPECT_TRUE(l.empty());
 }
 
+
 TEST(Jugador, setApuestasygetApuestas) {
   Jugador j("33XX", "1");
   string nomfich=j.getDNI()+".txt";
@@ -98,4 +99,3 @@ TEST(Jugador, setApuestasygetApuestas) {
   EXPECT_EQ("bajo", (*i).valor);
   EXPECT_EQ(45, (*i).cantidad);
 }
-*/
