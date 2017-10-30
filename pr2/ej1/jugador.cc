@@ -1,5 +1,8 @@
 #include "jugador.h"
-
+#include <fstream>
+#include <cstdio>
+#include <cstring>
+#include <iostream>
 
 
 Jugador::Jugador(string DNI,
@@ -24,6 +27,16 @@ Jugador::Jugador(string DNI,
 
 bool Jugador::apuesta(int tipo_apuesta, int valor_apuesta, int cantidad_apostada)
 {
+	//the values are assinned ot the priovate variables for lather use of them
+	//in "pushApuesta"
+	
+	temp_apuesta_.tipo=tipo_apuesta;
+	temp_apuesta_.valor=to_string(valor_apuesta);
+	temp_apuesta_.cantidad=cantidad_apostada;
+
+	pushApuesta();
+	//print_last_apuesta();
+
 
 	if(tipo_apuesta==1)//apuesta sencilla
 	{
@@ -35,6 +48,14 @@ bool Jugador::apuesta(int tipo_apuesta, int valor_apuesta, int cantidad_apostada
 
 bool Jugador::apuesta(int tipo_apuesta, string valor_apuesta, int cantidad_apostada)
 {
+	//the values are assinned ot the priovate variables for lather use of them
+	//in "pushApuesta"
+	temp_apuesta_.tipo=tipo_apuesta;
+	temp_apuesta_.valor=valor_apuesta;
+	temp_apuesta_.cantidad=cantidad_apostada;
+	pushApuesta();
+
+	//detects the type of betting
 	if (tipo_apuesta==2) //apuesta tipo color
 	{
 		if (valor_apuesta=="rojo") return apuesta_color_rojo();
@@ -160,7 +181,70 @@ bool Jugador::apuesta_alto()
 	}
 }
 
-void Jugador::pushApuesta(struct Apuesta)
+void Jugador::pushApuesta()
 {
-	//apuestas_.push_front(Apuesta);
+	apuestas_.push_back(temp_apuesta_);
+}
+
+
+void Jugador::print_last_apuesta()
+{
+	//temp_apuesta_=apuestas_.back();
+	temp_apuesta_ = apuestas_.back();
+	//b.tipo_apuesta = 1;
+	printf("tipo de apuesta: <%i>\n",temp_apuesta_.tipo);
+	cout<<"valor de la apuesta; <"<<temp_apuesta_.valor<<">\n";
+	printf("cantidad apostada: <%i>\n",temp_apuesta_.cantidad);
+	printf("\n");
+}
+
+void Jugador::recordApuestas()
+{
+	std::ofstream f;
+	f.open(getDNI()+".txt");
+	int i=apuestas_.size();
+	while (i>0)
+	{
+		i--;
+		temp_apuesta_ = apuestas_.front();
+		f<<temp_apuesta_.tipo;
+		f<<",";
+		f<<temp_apuesta_.valor;
+		f<<",";
+		f<<temp_apuesta_.cantidad;
+		f<<"\n";
+		apuestas_.pop_front();
+	}
+
+
+	f.close();
+	
+}
+
+void Jugador::setApuestas()
+{
+
+	std::string temp;
+	std::ifstream f;
+	f.open(getDNI()+".txt");
+
+		//read the file
+	while (1)
+	{
+
+		//read form the file
+		if(!std::getline(f,temp,',')) break;
+		temp_apuesta_.tipo=atoi(temp.c_str());
+		std::getline(f,temp,',');
+		temp_apuesta_.valor=temp;
+		std::getline(f,temp,'\n');
+		temp_apuesta_.cantidad=atoi(temp.c_str());
+
+		//pushes the struct onto the future retun list
+		apuestas_.push_back(temp_apuesta_);
+		//print_last_apuesta();
+
+
+	}
+	f.close();
 }

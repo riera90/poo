@@ -4,40 +4,38 @@
 #include <iostream>
 #include <list>
 
-void print_class(*class a);
-class a
-{
-	public:
-		int a;
-};
+
+//struct Apuestas print_class(class Apuestas* a);
 
 
 int main(int argc, char const *argv[])
 {
-	std::string DNI="15101010E";
-	std::string nombre="pepe";
-	Persona p(DNI);
+	
 
-	p.print_all();
+	Jugador a("dni","codigo");
+	a.apuesta(1,2,3);
+	a.apuesta(1,22,33);
+	a.apuesta(1,222,333);
 
-	std::cout<<"apellidos y nombres: <"<<p.getApellidosyNombre()<<">\n";
-	std::cout<<"\n\n";
+	//a.print_last_apuesta();
+	a.setApuestas();
+	Jugador b("dni","codigo2");
+
+	b.getApuestas();
+	b.setDNI("dni2");
+	b.setApuestas();
 
 
 
-
-
-
-
-	std::list <class a> l_a;
-//	c_a.push_back('a');
 	
 
 	return 0;
 }
 
-void print_class(*class a)
+/*
+struct Apuestas print_class(class Apuestas* a)
 {
-
-
-}
+	a->a=0;
+	a->b=1;
+	//return a;
+}*/
