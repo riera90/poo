@@ -28,7 +28,7 @@ private:
 	string codigo_;
 	
 
-	std::list <struct Apuesta> apuestas_;
+	std::list <Apuesta> apuestas_;
 
 	Apuesta temp_apuesta_;
 
@@ -77,7 +77,6 @@ public:
 
 	//dev
 	void print_last_apuesta();
-	std::list <struct Apuesta> list_apuestas;
 
 };
 

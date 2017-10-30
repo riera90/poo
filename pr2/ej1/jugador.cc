@@ -200,6 +200,7 @@ void Jugador::print_last_apuesta()
 
 void Jugador::recordApuestas()
 {
+	//saves the bets onto a file named with the player's dni
 	std::ofstream f;
 	f.open(getDNI()+".txt");
 	int i=apuestas_.size();
@@ -223,12 +224,15 @@ void Jugador::recordApuestas()
 
 void Jugador::setApuestas()
 {
+	//read the file og the player's bets 
+	//(named with the player's dni)
 
 	std::string temp;
 	std::ifstream f;
 	f.open(getDNI()+".txt");
 
-		//read the file
+		//read the file og the player's bets 
+		//(named with the player's dni)
 	while (1)
 	{
 
@@ -242,7 +246,6 @@ void Jugador::setApuestas()
 
 		//pushes the struct onto the future retun list
 		apuestas_.push_back(temp_apuesta_);
-		//print_last_apuesta();
 
 
 	}
