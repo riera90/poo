@@ -1,6 +1,8 @@
 #ifndef BOLA_H
 #define BOLA_H
 
+#include <cstdio>
+
 class Bola
 {
 private:
@@ -8,14 +10,14 @@ private:
 public:
 	bool set_valor(int a)
 	{
-		if (a<=0 and a>=36)
+		if (a>=0 and a<=36)
 		{
 			valor_=a;
 			return true;
 		}
 		return false;
 	};
-	Bola(){valor_=0;};
+	Bola(){valor_=-1;};
 	void trow(){valor_=5;};
 	int get_valor(){return valor_;};
 	bool is_red()

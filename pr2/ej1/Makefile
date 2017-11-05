@@ -43,6 +43,8 @@ all : $(TESTS)
 clean :
 	rm -f $(TESTS) gtest.a gtest_main.a *.o
 	rm -f jugador persona bola crupier main.out
+	@echo removing .txt
+	rm -f *.txt
 
 # Builds gtest.a and gtest_main.a.
 

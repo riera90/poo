@@ -41,11 +41,14 @@ GTEST_HEADERS = $(GTEST_DIR)/include/gtest/*.h \
 # que incluye $(TEST) y, por tanto, intentará constriur cada uno de esos ejecutables
 all : $(TESTS)
 
+
 clean :
-	rm -f $(TESTS) gtest.a gtest_main.a *.o
-	rm -f jugador persona bola crupier main.out ruleta
+	@echo removing .o and .a
+	@rm -f $(TESTS) gtest.a gtest_main.a *.o
+	@echo removing executables
+	@rm -f jugador persona bola crupier main.out ruleta
 	@echo removing .txt
-	rm -f *.txt
+	@rm -f *.txt
 
 # Builds gtest.a and gtest_main.a.
 
@@ -103,9 +106,19 @@ jugador_unittest : jugador.o persona.o jugador_unittest.o gtest_main.a
 ruleta_unittest : ruleta.o persona.o jugador.o crupier.o ruleta_unittest.o gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
 
-main : bola.cc crupier.cc jugador.cc main.cc persona.cc ruleta.cc
+
+main : main.out
+	./main.out
+
+main.out : bola.cc crupier.cc jugador.cc main.cc persona.cc ruleta.cc
 	g++ -o main.out $^
 
 main-g : bola.cc crupier.cc jugador.cc main.cc persona.cc ruleta.cc
 	g++ -o main.out $^
 	gdb main.out
+
+t :
+	@echo removing .txt
+	@rm -f *.txt
+	./ruleta_unittest
+

@@ -1,6 +1,7 @@
 #ifndef CRUPIER_H
 #define CRUPIER_H
 
+#include <iostream>
 #include "persona.h"
 
 using namespace std;
@@ -21,7 +22,15 @@ class Crupier : public Persona
 				string pais="");
 		//~Crupier();
 		string getCodigo() const {return codigo_;};
-		void setCodigo(string codigo){codigo_=codigo;};
+		
+		void setCodigo(string codigo)
+		{
+			//printf("test1\n");
+			codigo_=codigo;
+			//printf("test2\n");
+			//cout<<"codigo: <"<<codigo_<<">\n";
+		};
+
 		void test(){printf("test crupier\n");};
 		
 };

@@ -32,10 +32,23 @@ int main(int argc, char const *argv[])
 	//
 
 
-	Crupier c("dnic","3");
-	printf("%s\n",c.getCodigo().c_str());
+	Crupier c("dni1","1");
+	Crupier c2("dni2","2");
+	//printf("%s\n",c.getCodigo().c_str());
 	Ruleta r(c);
-	r.test();
+	Ruleta r2(c2);
+
+	//r.test();
+	//r.setCrupier(c2);
+	//r.test();
+	Jugador jugador("dni","codigo");
+
+	r.addJugador(jugador);
+	r.escribeJugadores();
+
+	//r.deleteJugador(jugador);
+	//*c2=r.getCrupier();
+	//cout<<c2->getCodigo()<<"\n";
 
 
 

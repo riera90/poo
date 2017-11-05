@@ -1,54 +1,36 @@
-#ifndef RULETA_h
-#define RULETA_h
-#include "bola.h"
-#include "jugador.h"
+#ifndef _RULETA_H
+#define _RULETA_H
+
+#include <list>
 #include "crupier.h"
+#include "jugador.h"
+#include <string>
 
+using namespace std;
 
-class Ruleta
-{
+class Ruleta{
+	private:
+		int banca_;
+		int bola_;
+		list<Jugador> jugadores_;
+		Crupier crupier_;
 
-private:
-	int banca_;
-	//std::list <Jugador> jugadores_;
-	Bola bola;
-	//Crupier cr;
-
-
-	//
-
-protected:
-
-public:
-	Ruleta(const Crupier& obj);
-	Crupier *obj;
-
-	int getBanca (){return banca_;};
-	int getBola (){return bola.get_valor();};
-
-	bool set_valor(int a)
-	{
-		if (a<=0)
-		{
-			banca_=a;
-			return true;
-		}
-		return false;
-	};
-	bool setBola (int a){return bola.set_valor(a);};
-	//Crupier getCrupier(){return *crupier;};
-	//void setCrupier();
-	void test()
-	{
-		printf("test\n");
-		//Crupier obj=*crupier;
-		//obj.setCodigo("123");
-		//crupier->setCodigo("123");
-		//printf("test2\n");
-		obj->test();
-	};
-
+	public:
+		Ruleta(Crupier initCrupier);
+		int getBanca() {return(banca_);}
+		bool setBanca(int banca);
+		int getBola(){return(bola_);}
+		bool setBola(int bola);
+		Crupier getCrupier(){return(crupier_);}
+		void setCrupier(Crupier crupier);
+		list<Jugador> getJugadores(){return(jugadores_);}
+		void addJugador(Jugador jugador);
+		int deleteJugador(Jugador jugador);
+		int deleteJugador(string DNI);
+		void escribeJugadores();
+		void leeJugadores();
+		void giraRuleta();
+		void getPremios();
 };
-
 
 #endif
