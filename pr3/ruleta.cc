@@ -4,59 +4,61 @@
 #include <fstream>
 #include <cstdlib>
 #include <string>
+#include <unistd.h>
+#include <fstream>
+
 
 using namespace std;
 
-Ruleta::Ruleta(Crupier initCrupier) : crupier_(initCrupier){
+Ruleta::Ruleta(Crupier initCrupier) : crupier_(initCrupier)
+{
 	setBanca(1000000);
-	bola_ = -1;
-	crupier_ = initCrupier;
+	bola_.set_valor(-1);
 	srand(time(NULL));
 }
 
-bool Ruleta::setBanca(int banca){
-	if(banca>0){
+bool Ruleta::setBanca(int banca)
+{
+	if(banca>=0){
 		banca_ = banca;
 		return(true);
 	}
 	else{
+		printf("error, la banca no puede tener un saldo negativo\n");
 		return(false);
 	}
 }
 
-bool Ruleta::setBola(int bola)
-{
-	if((bola>-1) && (bola<37)){
-		bola_ = bola;
-		return(true);
-	}
-	else{
-		return(false);
-	}
+bool Ruleta::setBola(int bola){
+	return(bola_.set_valor(bola));
 }
 
 void Ruleta::setCrupier(Crupier crupier){
 	crupier_ = crupier;
 }
 
-void Ruleta::addJugador(Jugador jugador){
+bool Ruleta::addJugador(Jugador jugador){
 	ifstream ifile;
-
 	jugadores_.push_back(jugador);
 	ifile.open((jugador.getDNI()+".txt").c_str());
 	if(!ifile.is_open()){
 		ofstream ofile((jugador.getDNI()+".txt").c_str());
+		ofile.close();
+		ifile.close();
+		return false;
+	}else{
+		ifile.close();
+		return true;
 	}
 }
 
 int Ruleta::deleteJugador(Jugador jugador){
 	list<Jugador>::iterator i;
 
-	if(jugadores_.empty()){
-		return(-1);
-	}
+	if(jugadores_.empty()) return(-1);
+
 	for(i=jugadores_.begin(); i!=jugadores_.end(); i++){
-		if((*i).getDNI() == jugador.getDNI()){
+		if(i->getDNI() == jugador.getDNI()){
 			jugadores_.erase(i);
 			return(1);
 		}
@@ -67,12 +69,13 @@ int Ruleta::deleteJugador(Jugador jugador){
 int Ruleta::deleteJugador(string DNI){
 	list<Jugador>::iterator i;
 
-	if(jugadores_.empty()){
-		return(-1);
-	}
+	if(jugadores_.empty()) return(-1);
+
 	for(i=jugadores_.begin(); i!=jugadores_.end(); i++){
-		if((*i).getDNI() == DNI){
+		if(i->getDNI() == DNI){
 			jugadores_.erase(i);
+			remove((i->getDNI()+".txt").c_str());
+
 			return(1);
 		}
 	}
@@ -80,68 +83,169 @@ int Ruleta::deleteJugador(string DNI){
 }
 
 void Ruleta::escribeJugadores(){
-	ifstream ifile;
+	ofstream ofile;
+	ofile.open("jugadores.txt");
+	if(!ofile.is_open()){
+		printf("error el fichero no se pudo crear\n");
+		exit;
+	}
+	list<Jugador>::iterator it;
+	for(it=jugadores_.begin(); it!=jugadores_.end(); it++){
+		ofile<<it->getDNI()<<",";
+		ofile<<it->getCodigo()<<",";
+		ofile<<it->getNombre()<<",";
+		ofile<<it->getApellidos()<<",";
+		ofile<<it->getDireccion()<<",";
+		ofile<<it->getLocalidad()<<",";
+		ofile<<it->getProvincia()<<",";
+		ofile<<it->getPais()<<",";
+		ofile<<it->getDinero()<<"\n";
 
-	ifile.open("jugadores.txt");
-	if(!ifile.is_open()){
-		ofstream ofile("jugadores.txt");
 	}
 }
 
 void Ruleta::leeJugadores(){
-	ifstream ifile;
-	string line;
-	Jugador aux("auxDNI", "auxCodigo");
-
-	jugadores_.clear();
-	ifile.open("jugadores.txt");
-	if(ifile.is_open()){
-		while(getline(ifile, line, ',')){
-			aux.setDNI(line);
-			getline(ifile, line, ',');
-			aux.setCodigo(line);
-			getline(ifile, line, ',');
-			aux.setNombre(line);
-			getline(ifile, line, ',');
-			aux.setApellidos(line);
-			getline(ifile, line, ',');
-			aux.setDireccion(line);
-			getline(ifile, line, ',');
-			aux.setLocalidad(line);
-			getline(ifile, line, ',');
-			aux.setProvincia(line);
-			getline(ifile, line, ',');
-			aux.setPais(line);
-			getline(ifile, line, ',');
-			aux.setDinero(atoi(line.c_str()));
-			getline(ifile, line, '\n');
-			jugadores_.push_back(aux);
-		}
-		ifile.close();
-	}else{
-		printf("\nEl archivo jugadores.txt no se ha podido abrir correctamente o no existe.\n");
-	}
-}
-
-void Ruleta::giraRuleta(){
-	int bola;
-
-	bola = rand()%37;
-	setBola(bola);
+	string temp;
+	ifstream file;
+    Jugador jug_temp("","");
+    file.open("jugadores.txt");
+    
+    while (!0){
+	if (!std::getline(file,temp,',')) break;
+	    jug_temp.setDNI(temp);
+		std::getline(file,temp,',');
+	    jug_temp.setCodigo(temp);
+	    std::getline(file,temp,',');
+	    jug_temp.setNombre(temp);
+	    std::getline(file,temp,',');
+	    jug_temp.setApellidos(temp);
+	    std::getline(file,temp,',');
+	    jug_temp.setDireccion(temp);
+	    std::getline(file,temp,',');
+	    jug_temp.setLocalidad(temp);
+	    std::getline(file,temp,',');
+	    jug_temp.setProvincia(temp);
+	    std::getline(file,temp,',');
+	    jug_temp.setPais(temp);
+	    std::getline(file,temp,'\n');
+	    jug_temp.setDinero(atoi(temp.c_str()));
+	    jugadores_.push_back(jug_temp);
+    }
+	file.close();
 }
 
 void Ruleta::getPremios(){
-	list<Jugador>::iterator i;
-	list<Apuesta> aux;
-	list<Apuesta>::iterator j;
+	test_print_list (jugadores_);
+	int dif;//diference in the win or lose
 
-	for(i=jugadores_.begin(); i!=jugadores_.end(); i++){
-		ifstream ifile(((*i).getDNI()+".txt").c_str(), ios::in);
-		(*i).setApuestas();
-		aux = (*i).getApuestas();
-		for(j=aux.begin(); j!=aux.end(); j++){
+	Jugador jug_temp("","");
+	printf("oooooooooooooooooooooooooooooooooooooo\n");
+	
+	list <Apuesta> list_apuestas_temp;
+	list <Apuesta>::iterator apuestas_it;
+	jugadores_.clear();
+	leeJugadores();//load the jugadores.txt
 
+	list<Jugador>::iterator it;
+	for(it=jugadores_.begin(); it!=jugadores_.end(); it++){//run trought the players
+		printf("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
+		cout<<"\tsize list_apuestas_temp: <"<<list_apuestas_temp.size()<<">\n";
+		
+			//clear the memory form the previous itetarion
+		jug_temp.clear();
+		list_apuestas_temp.clear();
+
+
+		jug_temp.setDNI(it->getDNI().c_str());//load the dni into the player obj
+		jug_temp.setApuestas();//load the dni.txt into memory
+		list_apuestas_temp=jug_temp.getApuestas();//load the list of bets into the temp list
+		test_print_list (list_apuestas_temp);
+		cout<<"dni "<<jug_temp.getDNI()<<"\n";
+		cout<<"\tsize list_apuestas_temp: <"<<list_apuestas_temp.size()<<">\n";
+
+
+		for(apuestas_it=list_apuestas_temp.begin(); apuestas_it!=list_apuestas_temp.end(); apuestas_it++){
+			cout<<">>>>>>>>>>tipo: <"<<apuestas_it->tipo<<">\n";
+			cout<<">>>>>>>>>>valor: <"<<apuestas_it->valor<<">\n";
+			cout<<">>>>>>>>>>cantidad: <"<<apuestas_it->cantidad<<">\n";
+			printf("-------------------------------------------\n");
+			switch ((int)apuestas_it->tipo){
+				case 1:
+					if (jug_temp.apuesta_sencilla(atoi(apuestas_it->valor.c_str()))){
+						dif=apuesta_ganada(atoi(apuestas_it->valor.c_str()),36);
+						it->setDinero(it->getDinero()+dif);
+					}else{
+						dif=apuesta_perida(atoi(apuestas_it->valor.c_str()),36);
+						it->setDinero(it->getDinero()+dif);
+					}
+					break;
+
+				case 2:
+					if(((apuestas_it->valor=="rojo") and (jug_temp.apuesta_color_rojo(atoi(apuestas_it->valor.c_str()))))
+					or((apuestas_it->valor=="negro") and (jug_temp.apuesta_color_negro(atoi(apuestas_it->valor.c_str()))))){
+						dif=apuesta_ganada(atoi(apuestas_it->valor.c_str()),2);
+						it->setDinero(it->getDinero()+dif);
+					}else{
+						dif=apuesta_perida(atoi(apuestas_it->valor.c_str()),2);
+						it->setDinero(it->getDinero()+dif);
+					}
+					break;
+
+				case 3:
+					if(((apuestas_it->valor=="par") and (jug_temp.apuesta_par(atoi(apuestas_it->valor.c_str()))))
+					or((apuestas_it->valor=="impar") and (jug_temp.apuesta_impar(atoi(apuestas_it->valor.c_str()))))){
+						dif=apuesta_ganada(atoi(apuestas_it->valor.c_str()),2);
+						it->setDinero(it->getDinero()+dif);
+					}else{
+						dif=apuesta_perida(atoi(apuestas_it->valor.c_str()),2);
+						it->setDinero(it->getDinero()+dif);
+					}
+					break;
+
+				case 4:
+					if(((apuestas_it->valor=="bajo") and (jug_temp.apuesta_bajo(atoi(apuestas_it->valor.c_str()))))
+					or((apuestas_it->valor=="alto") and (jug_temp.apuesta_alto(atoi(apuestas_it->valor.c_str()))))){
+						dif=apuesta_ganada(atoi(apuestas_it->valor.c_str()),2);
+						it->setDinero(it->getDinero()+dif);
+					}else{
+						dif=apuesta_perida(atoi(apuestas_it->valor.c_str()),2);
+						it->setDinero(it->getDinero()+dif);
+					}
+					break;
+			}
 		}
+
 	}
 
+}
+
+int Ruleta::apuesta_ganada(int cant, int en_contra){
+	setBanca(getBanca()-cant*en_contra-cant);
+	return cant*en_contra-cant;
+}
+
+int Ruleta::apuesta_perida(int cant, int en_contra){
+	setBanca(getBanca()+cant*en_contra-cant);
+	return -cant*en_contra-cant;
+}
+
+
+
+//--------------------------------------------------------------------
+
+
+
+void Ruleta::test_print_list (list<Jugador> jugadores){
+	list<Jugador>::iterator it_test;
+	for (it_test=jugadores.begin(); it_test!=jugadores.end(); ++it_test){
+		cout<<"\tdni: <"<<it_test->getDNI()<<">\n";
+	}
+	cout<<"\tsize: <"<<jugadores.size()<<">\n";
+}
+void Ruleta::test_print_list (list<Apuesta> lista){
+	list<Apuesta>::iterator it_test;
+	for (it_test=lista.begin(); it_test!=lista.end(); ++it_test){
+		cout<<"\ttipo: <"<<it_test->tipo<<">\n";
+	}
+	cout<<"\tsize: <"<<lista.size()<<">\n";
 }

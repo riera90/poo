@@ -86,7 +86,7 @@ TEST(Ruleta, addJugadorFicheros) {
   EXPECT_TRUE(salida);
   salida.close();
 }
-/*
+
 TEST(Ruleta, deleteJugador) {
   Crupier c("33XX","crupier1");
   Jugador j1("44XX","jugador1");
@@ -105,7 +105,7 @@ TEST(Ruleta, deleteJugador) {
   EXPECT_EQ(-1,r.deleteJugador(j1));
   EXPECT_EQ(0, r.getJugadores().size());
 }
-/*
+
 TEST(Ruleta, deleteJugadorDNI) {
   Crupier c("33XX","crupier1");
   Jugador j1("44XX","jugador1");
@@ -150,8 +150,8 @@ TEST(Ruleta, giraRuleta) {
     EXPECT_GT(r.getBola(), -1);
     EXPECT_LT(r.getBola(), 37);
   }
-}*/
-/*
+}
+
 TEST(Ruleta, getPremios) {
   Crupier c("33XX","crupier1");
   Jugador j1("44XX","jugador1");
@@ -183,7 +183,7 @@ TEST(Ruleta, getPremios) {
   EXPECT_EQ(880, (++r.getJugadores().begin())->getDinero());
   EXPECT_EQ(999540, r.getBanca());
 }
-
+/* 
 TEST(Ruleta, getPremiosCero) {
   Crupier c("33XX","crupier1");
   Jugador j1("44XX","jugador1");
@@ -214,4 +214,5 @@ TEST(Ruleta, getPremiosCero) {
   EXPECT_EQ(740, (++r.getJugadores().begin())->getDinero());
   EXPECT_EQ(1000360, r.getBanca());
 }
+
 */

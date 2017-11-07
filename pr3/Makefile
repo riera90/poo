@@ -110,10 +110,10 @@ ruleta_unittest : ruleta.o persona.o jugador.o crupier.o ruleta_unittest.o gtest
 main : main.out
 	./main.out
 
-main.out : bola.cc crupier.cc jugador.cc main.cc persona.cc ruleta.cc
+main.out : crupier.cc jugador.cc main.cc persona.cc ruleta.cc
 	g++ -o main.out $^
 
-main-g : bola.cc crupier.cc jugador.cc main.cc persona.cc ruleta.cc
+main-g : crupier.cc jugador.cc main.cc persona.cc ruleta.cc
 	g++ -o main.out $^
 	gdb main.out
 
@@ -122,3 +122,5 @@ t :
 	@rm -f *.txt
 	./ruleta_unittest
 
+r : ./ruleta_unittest
+	./ruleta_unittest
