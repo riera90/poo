@@ -61,18 +61,6 @@ public:
 	std::list <struct Apuesta> getApuestas() const {return apuestas_;};
 
 
-	bool apuesta_sencilla(int val);
-		//apuesta a un valor especifico
-	bool apuesta_color_rojo(int val);
-	bool apuesta_color_negro(int val);
-		//apuestas a un color, el color es una cualidad del objeto "Bola"
-	bool apuesta_par(int val);
-	bool apuesta_impar(int val);
-		//apuesta a la paridad eel valor
-	bool apuesta_bajo(int val);
-		//apuesta a que el número es menor o igual que 18
-	bool apuesta_alto(int val);
-		//apuesta a que el número es mayor que 18
 	void pushApuesta();
 		//hace push a una estrunctura de apuesta en la lista de apuestas
 	void clear();

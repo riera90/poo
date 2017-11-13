@@ -35,7 +35,7 @@ class Ruleta
 		void getPremios();
 		
 		int apuesta_ganada(int cant, int en_contra);
-		int apuesta_perida(int cant, int en_contra);
+		int apuesta_perida(int cant);
 
 
 

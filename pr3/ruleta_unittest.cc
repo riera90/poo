@@ -183,7 +183,7 @@ TEST(Ruleta, getPremios) {
   EXPECT_EQ(880, (++r.getJugadores().begin())->getDinero());
   EXPECT_EQ(999540, r.getBanca());
 }
-/* 
+
 TEST(Ruleta, getPremiosCero) {
   Crupier c("33XX","crupier1");
   Jugador j1("44XX","jugador1");
@@ -208,11 +208,10 @@ TEST(Ruleta, getPremiosCero) {
 
   r.setBola(0); // jugadores pierden todo
   r.getPremios();
-  //44XX -> 1000 - 10 - 20 - 30 - 40 = 900 
+  //44XX -> 1000 - 10 - 20 - 30 - 40 = 900
   //55XX -> 1000 - 50 - 60 - 70 - 80 = 740
   EXPECT_EQ(900, r.getJugadores().begin()->getDinero());
   EXPECT_EQ(740, (++r.getJugadores().begin())->getDinero());
   EXPECT_EQ(1000360, r.getBanca());
 }
 
-*/

@@ -115,46 +115,6 @@ void Jugador::clear(){
 
 
 
-bool Jugador::apuesta_sencilla(int val){
-	if (val==b_.get_valor()) return true;
-	else return false;
-}
-
-bool Jugador::apuesta_color_rojo(int val){
-	b_.set_valor(val);
-	if (b_.is_red()) return true;
-	else return false;
-}
-
-bool Jugador::apuesta_color_negro(int val){
-	b_.set_valor(val);
-	if (b_.is_black()) return true;
-	else return false;
-}
-
-bool Jugador::apuesta_par(int val){
-	b_.set_valor(val);
-	if (b_.get_valor()%2==0) return true;
-	else return false;
-}
-bool Jugador::apuesta_impar(int val){
-	b_.set_valor(val);
-	if (b_.get_valor()%2==1) return true;
-	else return false;
-}
-
-bool Jugador::apuesta_bajo(int val){
-	b_.set_valor(val);
-	if (b_.get_valor()<=18) return true;
-	else return false;
-}
-bool Jugador::apuesta_alto(int val){
-	b_.set_valor(val);
-	if (b_.get_valor()>18) return true;
-	else return false;
-}
-
-
 //dev
 void Jugador::print_last_apuesta()
 {

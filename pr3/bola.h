@@ -1,7 +1,9 @@
 #ifndef BOLA_H
 #define BOLA_H
 
+#include <cmath>
 #include <cstdio>
+#include <time.h>
 
 class Bola
 {
@@ -17,8 +19,13 @@ public:
 		}
 		return false;
 	};
-	Bola(){valor_=-1;};
-	void trow(){valor_=5;};
+	Bola(){
+		valor_=-1;
+		srand(time(NULL));
+	};
+	void trow(){
+		set_valor(rand()%36+1);
+	};
 	int get_valor(){return valor_;};
 	bool is_red()
 	{
@@ -49,8 +56,6 @@ public:
 		if(is_red())return false;
 		else return true;
 	};
-	//~Bola();
-
 };
 
 
