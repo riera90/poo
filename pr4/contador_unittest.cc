@@ -195,7 +195,7 @@ TEST(Contador, DevolucionUnarioPostfijo) {
   EXPECT_EQ(11, d.get());
 }
 
-/*
+
 TEST(Contador, Suma1) {
   Contador c,d;
   c=d+10;
@@ -203,7 +203,7 @@ TEST(Contador, Suma1) {
   c=c+15;
   EXPECT_EQ(25, c.get());
 }
-/*
+
 TEST(Contador, Suma2) {
   Contador c,d;
   c=10+d;
@@ -249,4 +249,3 @@ TEST(Contador, Resta3) {
   c=1-d;
   EXPECT_EQ(1, c.get());// valor mínimo es 1
 }
-*/

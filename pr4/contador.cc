@@ -54,7 +54,7 @@ Contador::Contador(int val_min,int val_max, int initial_value){
 	}
 
 	bool Contador::undo(int n){
-		if (n>values.size())return false;
+		if (n>values.size() or n<0)return false;
 		for (int i = 0; i < n; ++i){
 			values.pop_back();
 		}
@@ -62,20 +62,41 @@ Contador::Contador(int val_min,int val_max, int initial_value){
 		return true;
 	}
 
-	Contador operator+(Contador &obj1,const Contador &obj2){
-		Contador aux;
-		aux.set(obj1,obj1.value+obj2.value);
-		return obj1;
+	Contador operator+(int val,Contador &obj){
+		Contador aux(-999999999,999999999,0);
+		aux.set((val+obj.get()));
+		return aux;	bool undo(int n=1);
+
 	}
 
 	Contador operator+(Contador &obj,int val){
-		Contador aux;
-		aux.set(obj,obj.value+val);
-		return obj;
+		Contador aux(-999999999,999999999,0);
+		aux.set(val+obj.get());
+		return aux;
 	}
 
-	Contador operator+(int val,const Contador &obj){
-		val+=obj.value;
-		return val;
+	Contador operator-(int val,Contador &obj){
+		Contador aux(-999999999,999999999,0);
+		aux.set((val-obj.get()));
+		return aux;	bool undo(int n=1);
+
 	}
+
+	Contador operator-(Contador &obj,int val){
+		Contador aux(-999999999,999999999,0);
+		aux.set(obj.get()-val);
+		return aux;
+	}
+
+	/*Contador Contador::operator+(int val){
+		Contador aux;
+		aux.set(value+val);
+		return(aux);
+	}
+
+	Contador Contador::operator-(int val){
+		Contador aux;
+		aux.set(value-val);
+		return(aux);
+	}*/
 
