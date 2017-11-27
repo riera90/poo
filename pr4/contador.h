@@ -35,9 +35,7 @@ public:
 	Contador operator--(int);
 	Contador operator--(void);
 	bool undo(int n=1);
-	/*Contador operator+(const Contador &obj);
-	Contador operator+(int val);
-	Contador operator-(int val);*/
+	
 	friend Contador operator+(int val,Contador &obj);
 	friend Contador operator+(Contador &obj,int val);
 	friend Contador operator-(int val,Contador &obj);
@@ -45,11 +43,6 @@ public:
 
 
 };
-/*
-int operator+(const Contador &obj1,const Contador &obj2);
-int operator+(const Contador &obj,const int val);
-int operator+(const int val,const Contador &obj);
-*/
 
 int operator+(const Contador &obj,const int val);
 

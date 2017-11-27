@@ -88,15 +88,3 @@ Contador::Contador(int val_min,int val_max, int initial_value){
 		return aux;
 	}
 
-	/*Contador Contador::operator+(int val){
-		Contador aux;
-		aux.set(value+val);
-		return(aux);
-	}
-
-	Contador Contador::operator-(int val){
-		Contador aux;
-		aux.set(value-val);
-		return(aux);
-	}*/
-
