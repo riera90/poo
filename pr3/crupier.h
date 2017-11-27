@@ -6,6 +6,11 @@
 
 using namespace std;
 
+
+/*
+the class crupier simulates a crupier of a table
+the class cruìer is a persona
+*/
 class Crupier : public Persona
 {
 	private:
@@ -20,18 +25,10 @@ class Crupier : public Persona
 				string localidad="",
 				string provincia="",
 				string pais="");
-		//~Crupier();
+		
 		string getCodigo() const {return codigo_;};
 		
-		void setCodigo(string codigo)
-		{
-			//printf("test1\n");
-			codigo_=codigo;
-			//printf("test2\n");
-			//cout<<"codigo: <"<<codigo_<<">\n";
-		};
-
-		void test(){printf("test crupier\n");};
+		void setCodigo(string codigo){codigo_=codigo;};
 		
 };
 

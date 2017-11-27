@@ -27,21 +27,15 @@ Jugador::Jugador(string DNI,
 
 void Jugador::apuesta(int tipo_apuesta, int valor_apuesta, int cantidad_apostada)
 {
-	//the values are assinned ot the priovate variables for lather use of them
-	//in "pushApuesta"
 	apuesta(tipo_apuesta,to_string(valor_apuesta),cantidad_apostada);
 }
 
 void Jugador::apuesta(int tipo_apuesta, string valor_apuesta, int cantidad_apostada)
 {
-	//the values are assinned ot the priovate variables for lather use of them
-	//in "pushApuesta"
 	temp_apuesta_.tipo=tipo_apuesta;
 	temp_apuesta_.valor=valor_apuesta;
 	temp_apuesta_.cantidad=cantidad_apostada;
 	pushApuesta();
-
-	
 }
 
 
@@ -55,7 +49,6 @@ void Jugador::pushApuesta()
 
 void Jugador::recordApuestas()
 {
-	//saves the bets onto a file named with the player's dni
 	std::ofstream f;
 	f.open(getDNI()+".txt");
 	int i=apuestas_.size();
@@ -113,9 +106,6 @@ void Jugador::clear(){
 	apuestas_.clear();
 }
 
-
-
-//dev
 void Jugador::print_last_apuesta()
 {
 	temp_apuesta_ = apuestas_.back();

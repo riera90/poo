@@ -16,9 +16,12 @@ class Ruleta
 		Bola bola_;
 		list<Jugador> jugadores_;
 		Crupier crupier_;
+		int apuesta_ganada(int cant, int en_contra);
+		int apuesta_perida(int cant);
 
 	public:
 		Ruleta(Crupier initCrupier);
+			//constructor of the class
 		int getBanca() {return(banca_);}
 		bool setBanca(int banca);
 		int getBola(){return(bola_.get_valor());}
@@ -27,23 +30,27 @@ class Ruleta
 		void setCrupier(Crupier crupier);
 		list<Jugador> getJugadores(){return(jugadores_);}
 		bool addJugador(Jugador jugador);
+			//adds a player to the table
 		int deleteJugador(Jugador jugador);
 		int deleteJugador(string DNI);
+			//remove the player from the table
 		void escribeJugadores();
+			//writes the players bets on a file named after his DNI
 		void leeJugadores();
+			//reads the players bets of a file named after his DNI
 		void giraRuleta(){bola_.trow();};
 		void getPremios();
-		
-		int apuesta_ganada(int cant, int en_contra);
-		int apuesta_perida(int cant);
+			//aplies the bets gains or losses to the players credits
+
 
 
 
 //--------------------------------------------------------------------
 
 
-		void test_print_list(list<Jugador> jugadores);
-		void test_print_list (list<Apuesta> jugadores);
+		void print_list(list<Jugador> jugadores);
+		void print_list (list<Apuesta> jugadores);
+			//prints the lsit of players or bets
 };
 
 #endif

@@ -47,10 +47,12 @@ public:
 			string pais="");
 
 	void recordApuestas();
+		//saves the bets onto a file named with the player's dni
 
 	void apuesta(int tipo_apuesta, int valor_apuesta, int cantidad_apostada);
 	void apuesta(int tipo_apuesta, string valor_apuesta, int cantidad_apostada);
-
+		//the values are assinned ot the private variables for later use of them
+		//in "pushApuesta"
 	
 
 	void setDinero(int val){dinero_=val;};
@@ -58,15 +60,22 @@ public:
 	int getDinero() const {return dinero_;};
 	string getCodigo() const {return codigo_;};
 	void setApuestas();
+		//read the file of the player's bets 
+		//(named with the player's dni)
+		//and charges it into the class mem
+	
 	std::list <struct Apuesta> getApuestas() const {return apuestas_;};
 
 
 	void pushApuesta();
-		//hace push a una estrunctura de apuesta en la lista de apuestas
-	void clear();
+		//make push of a bet into the list
 
-	//dev
+	void clear();
+		//clear the players bets
+
+	
 	void print_last_apuesta();
+		//prints the last bet
 
 };
 

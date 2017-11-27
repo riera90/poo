@@ -131,23 +131,20 @@ void Ruleta::leeJugadores(){
 }
 
 void Ruleta::getPremios(){
-	//test_print_list (jugadores_);
 	int dif;//diference in the win or lose
 
 	Jugador jug_temp("","");
-	//printf("oooooooooooooooooooooooooooooooooooooo\n");
 	
 	list <Apuesta> list_apuestas_temp;
 	list <Apuesta>::iterator apuestas_it;
 	jugadores_.clear();
 	leeJugadores();//load the jugadores.txt
 
+	//run trought the players
 	list<Jugador>::iterator it;
-	for(it=jugadores_.begin(); it!=jugadores_.end(); it++){//run trought the players
-		//printf("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n");
-		//cout<<"\tsize list_apuestas_temp: <"<<list_apuestas_temp.size()<<">\n";
+	for(it=jugadores_.begin(); it!=jugadores_.end(); it++){
 		
-			//clear the memory form the previous itetarion
+		//clear the memory form the previous itetarion
 		jug_temp.clear();
 		list_apuestas_temp.clear();
 
@@ -155,9 +152,6 @@ void Ruleta::getPremios(){
 		jug_temp.setDNI(it->getDNI().c_str());//load the dni into the player obj
 		jug_temp.setApuestas();//load the dni.txt into memory
 		list_apuestas_temp=jug_temp.getApuestas();//load the list of bets into the temp list
-		//test_print_list (list_apuestas_temp);
-		//cout<<"dni "<<jug_temp.getDNI()<<"\n";
-		//cout<<"\tsize list_apuestas_temp: <"<<list_apuestas_temp.size()<<">\n";
 
 
 		for(apuestas_it=list_apuestas_temp.begin(); apuestas_it!=list_apuestas_temp.end(); apuestas_it++){
@@ -171,11 +165,9 @@ void Ruleta::getPremios(){
 					break;
 				}
 					if (atoi(apuestas_it->valor.c_str())==bola_.get_valor()){
-						//cout<<"cantidad: "<<apuestas_it->cantidad<<"\n";
 						dif=apuesta_ganada(apuestas_it->cantidad,36);
 						it->setDinero(it->getDinero()+dif);
 					}else{
-						//cout<<"cantidad: "<<apuestas_it->cantidad<<"\n";
 						dif=apuesta_perida(apuestas_it->cantidad);
 						it->setDinero(it->getDinero()+dif);
 					}
@@ -258,14 +250,12 @@ void Ruleta::getPremios(){
 
 int Ruleta::apuesta_ganada(int cant, int en_contra){
 	int dif=cant*(en_contra-1);
-	//money algorithm
 	setBanca(getBanca()-dif);
 	return +dif;
 }
 
 int Ruleta::apuesta_perida(int cant){
 	int dif=cant;
-	//money algorithm
 	setBanca(getBanca()+dif);
 	return -dif;
 }
@@ -276,14 +266,14 @@ int Ruleta::apuesta_perida(int cant){
 
 
 
-void Ruleta::test_print_list (list<Jugador> jugadores){
+void Ruleta::print_list (list<Jugador> jugadores){
 	list<Jugador>::iterator it_test;
 	for (it_test=jugadores.begin(); it_test!=jugadores.end(); ++it_test){
 		cout<<"\tdni: <"<<it_test->getDNI()<<">\n";
 	}
 	cout<<"\tsize: <"<<jugadores.size()<<">\n";
 }
-void Ruleta::test_print_list (list<Apuesta> lista){
+void Ruleta::print_list (list<Apuesta> lista){
 	list<Apuesta>::iterator it_test;
 	for (it_test=lista.begin(); it_test!=lista.end(); ++it_test){
 		cout<<"\ttipo: <"<<it_test->tipo<<">\n";

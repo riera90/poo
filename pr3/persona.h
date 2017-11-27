@@ -25,7 +25,6 @@ class Persona
 				string localidad="",
 				string provincia="",
 				string pais="");
-		//~Persona();
 
 		string getDNI() const {return DNI_;};
 		string getNombre() const {return nombre_;};
@@ -43,9 +42,6 @@ class Persona
 		void setLocalidad(string data){localidad_=data;};
 		void setProvincia(string data){provincia_=data;};
 		void setPais(string data){pais_=data;};
-
-		void print_all();
-			//debug function
 };
 
 #endif

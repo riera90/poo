@@ -23,16 +23,3 @@ Persona::Persona(string DNI,
 	provincia_=provincia;
 	pais_=pais;
 }
-
-
-
-void Persona::print_all()
-{
-	cout<<"DNI: <"<<DNI_<<">\n";
-	cout<<"nombre: <"<<nombre_<<">\n";
-	cout<<"apellidos: <"<<apellidos_<<">\n";
-	cout<<"direccion: <"<<direccion_<<">\n";
-	cout<<"localidad: <"<<localidad_<<">\n";
-	cout<<"provincia: <"<<provincia_<<">\n";
-	cout<<"pais: <"<<pais_<<">\n";
-}

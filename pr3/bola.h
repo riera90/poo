@@ -5,6 +5,13 @@
 #include <cstdio>
 #include <time.h>
 
+
+/*
+brief:
+the bola class simulates a casino ball
+this ball can take values from 1 to 36,
+and the colors black and red
+*/
 class Bola
 {
 private:
