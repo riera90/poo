@@ -82,4 +82,3 @@ contador_unittest : contador.o contador_unittest.o gtest_main.a
 
 x : contador_unittest
 	./contador_unittest
-	
