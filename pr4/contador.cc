@@ -65,7 +65,7 @@ Contador::Contador(int val_min,int val_max, int initial_value){
 	Contador operator+(int val,Contador &obj){
 		Contador aux(-999999999,999999999,0);
 		aux.set((val+obj.get()));
-		return aux;	bool undo(int n=1);
+		return aux;
 
 	}
 
@@ -78,7 +78,7 @@ Contador::Contador(int val_min,int val_max, int initial_value){
 	Contador operator-(int val,Contador &obj){
 		Contador aux(-999999999,999999999,0);
 		aux.set((val-obj.get()));
-		return aux;	bool undo(int n=1);
+		return aux;
 
 	}
 
@@ -87,4 +87,3 @@ Contador::Contador(int val_min,int val_max, int initial_value){
 		aux.set(obj.get()-val);
 		return aux;
 	}
-

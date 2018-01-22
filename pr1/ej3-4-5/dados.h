@@ -17,7 +17,7 @@ class Dados
 			object, used for the mean*/
 		int sum_d1_;
 		int sum_d2_;
-			/*this represet the sumatorium of 
+			/*this represet the sumatorium of
 			all the values the dices have taken,
 			is used for calculate the mean*/
 		std::vector <int> values_d1_;
