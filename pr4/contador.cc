@@ -26,14 +26,14 @@ Contador::Contador(int val_min,int val_max, int initial_value){
 		return obj.value;
 	}
 
-	Contador Contador::operator++(int){
+	Contador Contador::operator++(int){//a++
 		values.push_back(this->value);
 		Contador aux=*this;
 		set(value+1);
 		return aux;
 	}
 
-	Contador Contador::operator++(void){//--a
+	Contador Contador::operator++(void){//++a
 		values.push_back(this->value);
 		set(value+1);
 		return *this;
@@ -47,7 +47,7 @@ Contador::Contador(int val_min,int val_max, int initial_value){
 		return aux;
 	}
 
-	Contador Contador::operator--(void){
+	Contador Contador::operator--(void){//--a
 		values.push_back(this->value);
 		set(value-1);
 		return *this;
